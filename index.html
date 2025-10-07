@@ -78,7 +78,7 @@
         <h1>Unit 8: Lessons Learned – Reflection by Desler Antonio Fletes Bonilla</h1>
         <p class="sub">This project was possible thanks to a lot of caffeine. ☕</p>
 
-        <!-- 🎵 Player: autoplay + muted (unmutes on first click) -->
+        
         <div class="audio-ui">
           <button id="sfx" class="btn" aria-pressed="false">🔊 SFX: Off</button>
           <audio id="bgm" autoplay loop muted controls style="max-width:280px; border-radius:10px;">
@@ -115,8 +115,7 @@
   </div>
 
   <script>
-    // Content rewritten with simple, human language and expanded explanations,
-    // aligned to the "Todas las Unidades" document.
+    
     const SECTIONS = [
       {
         id: 0,
@@ -128,7 +127,7 @@
         ],
         learned: [],
         bullets: [],
-        videos: [] // no video in intro
+        videos: [] 
       },
 
       {
@@ -146,7 +145,7 @@
           "Every new term I’ll repeat DAACS to reset my plan. I’ll keep two quiet study spots ready, use Do Not Disturb on my phone, and keep that simple before–during–after check so my time actually counts."
         ],
         videos: [
-          // Elizabeth Cox — TED-Ed: What is imposter syndrome and how can you combat it?
+          
           "https://www.youtube.com/embed/ZQUxL4Jm1Lo"
         ]
       },
@@ -166,7 +165,7 @@
           "I’ll keep a weekly review, map each goal to small tasks, and do a quick OKR-style tune-up each quarter to drop what isn’t helping and double down on what is."
         ],
         videos: [
-          // simple, motivational planning content (works well embedded)
+         
           "https://www.youtube.com/embed/SGNaZHfwe2s",
           "https://www.youtube.com/embed/MlLFg6CETp4"
         ]
@@ -206,7 +205,7 @@
         bullets: [
           "I’ll book office hours before big deadlines, submit drafts to the Writing Center a week early, and check in with my coach each month. I’ll also use Library guides to find solid sources faster."
         ],
-        videos: [] // page stays clean; links are in text/services
+        videos: [] 
       },
 
       {
@@ -224,7 +223,7 @@
           "I’ll schedule one informational interview each quarter, keep a simple sheet of contacts and follow-ups, and turn insights into small portfolio pieces like analyses or dashboards."
         ],
         videos: [
-          // HBR: Find a mentor (also fits Unit 6 themes; still relevant here)
+          
           "https://www.youtube.com/embed/6sITr5V1XdE"
         ]
       },
@@ -243,7 +242,7 @@
         bullets: [
           "I’ll keep shared checklists, weekly micro-syncs, and a short retro after group assignments. I’ll write clear, kind messages that invite ideas and reduce confusion."
         ],
-        videos: [] // removed per your request
+        videos: [] 
       },
 
       {
@@ -261,7 +260,7 @@
           "At the start of every term I’ll rebuild my resource map, book recurring writing/tutoring time for big assignments, and use Library database guides to find reliable sources fast."
         ],
         videos: [
-          // UMGC Turnitin resources (from your doc)
+          
           "https://www.youtube.com/embed/vtGQ5Mcx0NQ",
           "https://www.youtube.com/embed/5hfOvacOR_A"
         ]
@@ -281,7 +280,7 @@
         bullets: [
           "I’ll keep a small library of message templates (questions, extension requests, feedback asks) and contact the right service as soon as a doubt appears—never at the last minute."
         ],
-        videos: [] // keep clean; content is text-first
+        videos: [] 
       },
 
       {
@@ -315,7 +314,7 @@
         bullets: [
           "I’ll keep my planning rituals, use the Writing Center before big submissions, schedule one informational interview per quarter, and turn each conversation into one clear next project."
         ],
-        videos: [] // removed per your request
+        videos: [] 
       },
 
       {
@@ -331,7 +330,7 @@
         bullets: [
           "I’m leaving this course with clarity and confidence—and a plan I can keep using as my studies and career move forward."
         ],
-        videos: [] // removed per your request
+        videos: [] 
       }
     ];
 
@@ -351,7 +350,7 @@
     const sfxBtn = document.getElementById('sfx');
     const bgm = document.getElementById('bgm');
 
-    // WebAudio click SFX (optional)
+   
     let ctx = null;
     function ping() {
       if (!state.sfx) return;
@@ -374,7 +373,7 @@
       ping();
     });
 
-    // Autoplay compatibility: unmute and play on first click if needed
+    
     document.addEventListener('DOMContentLoaded', () => {
       const tryPlay = () => {
         bgm.muted = false;
