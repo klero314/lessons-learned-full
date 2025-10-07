@@ -64,15 +64,12 @@
     .nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:18px 0 8px }
     .btn { padding:10px 14px; border-radius:12px; border:1px solid #232b3e; background:#0b0f1a; color:var(--ink) }
     .btn[disabled] { opacity:.4; cursor:not-allowed }
-    .count { color:var(--muted); font-size:13px }
+    .count { color: var(--muted); font-size:13px }
     .lead { color:#c9d3ee }
     .media { margin-top:16px; display:grid; gap:10px }
     .media iframe { width:100%; aspect-ratio: 16/9; border:0; border-radius:12px; box-shadow: var(--shadow) }
     .audio-ui { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px }
     .kbd { font-size:11px; padding:2px 6px; border-radius:6px; border:1px solid #26314b; background:#0b0f1a; color:#cbd5e1 }
-    .audio-loader { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
-    .audio-loader input[type='text']{ width:320px; max-width:100%; padding:8px 10px; border-radius:10px; border:1px solid #232b3e; background:#0b0f1a; color:var(--ink) }
-    .hidden { display:none }
   </style>
 </head>
 <body>
@@ -81,19 +78,18 @@
       <div>
         <h1>PACE 111T — Lessons Learned (Interactive)</h1>
         <p class="sub">Units 1–8, expanded with lecture-style summaries, concrete applications, and embedded videos.</p>
+
+        <!-- 🎵 Player: autoplay + muted (se desmutea al primer clic) -->
         <div class="audio-ui">
           <button id="sfx" class="btn" aria-pressed="false">🔊 SFX: Off</button>
-          <audio id="bgm" preload="none" loop controls style="max-width:280px">
+          <audio id="bgm" autoplay loop muted controls style="max-width:280px; border-radius:10px;">
             <source src="https://raw.githubusercontent.com/klero314/lessons-learned-full/main/assets/lofi-study-calm-peaceful-chill-hop-112191.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
           </audio>
-          <div class="audio-loader">
-            <input id="bgm-url" type="text" placeholder="Paste a direct MP3 URL (CC0/royalty-free)" />
-            <input id="bgm-file" type="file" accept="audio/mpeg,audio/mp3" />
-            <button id="bgm-load" class="btn">Load Music</button>
-          </div>
           <span class="kbd">Tip: Press ← / → to navigate</span>
         </div>
       </div>
+
       <div class="progress" aria-label="progress">
         <div class="meta"><span>Progress</span><span id="pct">0%</span></div>
         <div class="bar" aria-hidden="true"><i id="bar"></i></div>
@@ -109,7 +105,7 @@
     <section id="grid" class="grid" aria-label="Quick navigation"></section>
 
     <article class="card" aria-live="polite">
-      <div class="hero"></"></div>
+      <div class="hero"></div>
       <div class="inner">
         <div class="chips" id="chips"></div>
         <h2 id="title"></h2>
@@ -121,284 +117,190 @@
 
   <script>
     const SECTIONS = [
-  {
-    "id": 0,
-    "title": "Introduction",
-    "chips": [
-      "PACE 111T",
-      "Overview"
-    ],
-    "paras": [
-      "Welcome to my interactive reflection for PACE 111T. This site summarizes what I learned each week and how I’ll apply it.",
-      "Balancing academics with active-duty service pushed me to build better systems: focus blocks, smarter notes, and proactive communication."
-    ],
-    "lecture": [
-      "Orientation: What the course covers and how growth mindset fuels persistence.",
-      "Method: reflect → extract a technique → apply it in the next week."
-    ],
-    "learned": [
-      "Self-awareness is the lever for improvement.",
-      "Systems beat motivation—small, reliable habits compound."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/KbSPPFYxx3o"
-    ]
-  },
-  {
-    "id": 1,
-    "title": "Unit 1 — Introduction & Mindset / DAACS",
-    "chips": [
-      "Self‑Awareness",
-      "DAACS"
-    ],
-    "paras": [
-      "I used DAACS to map strengths and growth areas: study environment, test anxiety, and learning strategies."
-    ],
-    "lecture": [
-      "How DAACS domains translate into daily actions: environment, focus, metacognition.",
-      "Setting baselines and picking 1–2 habits to change first."
-    ],
-    "learned": [
-      "Identify friction points (noise, phone, unclear goals).",
-      "Track one habit for a week before stacking the next."
-    ],
-    "bullets": [
-      "Applied: ‘Do Not Disturb’, two quiet locations, pre‑study checklist.",
-      "Future: re-check DAACS every term to re-calibrate."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/PYfNA_lmkHM"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "Unit 2 — Goals & Motivations (SMART)",
-    "chips": [
-      "SMART Goals",
-      "Motivation"
-    ],
-    "paras": [
-      "I turned intentions into SMART goals (degree by 2028, emergency fund milestones, data-career steps)."
-    ],
-    "lecture": [
-      "SMART framework: Specific, Measurable, Achievable, Relevant, Time‑bound.",
-      "Tie goals to weekly actions; review on Sundays."
-    ],
-    "learned": [
-      "Clarity reduces procrastination.",
-      "Momentum comes from visible progress."
-    ],
-    "bullets": [
-      "Applied: weekly review, goal → task mapping.",
-      "Future: quarterly OKR‑style revisions."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/1-SvuFIQjK8"
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Unit 3 — Big Rocks & Time Management",
-    "chips": [
-      "Priorities",
-      "Time"
-    ],
-    "paras": [
-      "I prioritized ‘big rocks’ and built a realistic schedule around duty shifts, schoolwork, and life."
-    ],
-    "lecture": [
-      "Time boxing, focus sprints (25–50 min), energy-aware planning.",
-      "Buffers for travel/ops and exam weeks."
-    ],
-    "learned": [
-      "Protecting deep work hours increases quality and reduces stress."
-    ],
-    "bullets": [
-      "Applied: planner + alerts + Sunday planning.",
-      "Future: templates for heavy weeks."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/wfsl5R0S9nQ"
-    ]
-  },
-  {
-    "id": 4,
-    "title": "Unit 4 — Engaging with My Success Network",
-    "chips": [
-      "Support",
-      "Self‑Advocacy"
-    ],
-    "paras": [
-      "I mapped professors, tutors, advisors, and my Success Coach, and practiced concise outreach."
-    ],
-    "lecture": [
-      "Self‑advocacy email formula: context → clear ask → next step.",
-      "When to contact tutoring, writing center, or professor."
-    ],
-    "learned": [
-      "Asking early accelerates progress; silence slows it."
-    ],
-    "bullets": [
-      "Applied: 3‑sentence emails and scheduled office hours.",
-      "Future: monthly check‑ins and pre‑deadline reviews."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/5X3ZkV-0TtA"
-    ]
-  },
-  {
-    "id": 5,
-    "title": "Unit 5 — Informational Interview Preparation",
-    "chips": [
-      "Career",
-      "Interview"
-    ],
-    "paras": [
-      "I researched roles and trends in data/tech and interviewed Kevin Caballero Bonilla (Senior Data Architect)."
-    ],
-    "lecture": [
-      "How to find guests, craft questions, follow up, and convert insights into action items."
-    ],
-    "learned": [
-      "Networking turns ambiguity into direction."
-    ],
-    "bullets": [
-      "Applied: 10‑question guide; concise thank‑you with next steps.",
-      "Future: quarterly informational chats; CRM sheet of contacts."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/Gb6H0ZQh4OM"
-    ]
-  },
-  {
-    "id": 6,
-    "title": "Unit 6 — Networking & Teamwork",
-    "chips": [
-      "Teamwork",
-      "Communication"
-    ],
-    "paras": [
-      "I translated military teamwork into academic collaboration: clear roles, trust, and short feedback loops."
-    ],
-    "lecture": [
-      "Define roles, set ‘definition of done’, run quick retrospectives."
-    ],
-    "learned": [
-      "Responsibility + empathy = real collaboration."
-    ],
-    "bullets": [
-      "Applied: shared checklists and brief syncs.",
-      "Future: retro after each group deliverable."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/HhHc1ZkK1Mg"
-    ]
-  },
-  {
-    "id": 7,
-    "title": "Unit 7 — Support Services",
-    "chips": [
-      "UMGC Resources",
-      "Tools"
-    ],
-    "paras": [
-      "I cataloged Writing Center, Career Services, UMGC Library, Microsoft 365, and tutoring resources."
-    ],
-    "lecture": [
-      "When to use which resource; building a personal ‘resource map’ at course start."
-    ],
-    "learned": [
-      "Tools reduce friction and raise quality."
-    ],
-    "bullets": [
-      "Applied: templates and citation guides to speed drafts.",
-      "Future: resource map every term."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/sjE1H2Pp9X8"
-    ]
-  },
-  {
-    "id": 8,
-    "title": "Unit 8 — Self‑Advocacy & Communicating Needs",
-    "chips": [
-      "Self‑Advocacy",
-      "Clarity"
-    ],
-    "paras": [
-      "I practiced respectful, proactive communication to clarify expectations early with professors and tutors."
-    ],
-    "lecture": [
-      "Boundary setting, clarity, and respectful tone. Example templates for extensions or rubric questions."
-    ],
-    "learned": [
-      "Confidence follows clarity."
-    ],
-    "bullets": [
-      "Applied: ask when unsure; propose timelines.",
-      "Future: message template library for common scenarios."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/E9L9QnGJm2k"
-    ]
-  },
-  {
-    "id": 9,
-    "title": "My Key Takeaways",
-    "chips": [
-      "Growth",
-      "Habits"
-    ],
-    "paras": [
-      "What’s sticking with me beyond this course."
-    ],
-    "learned": [
-      "Time, environment, and stress can be managed with systems.",
-      "SMART goals + discipline keep me on track.",
-      "Support networks multiply outcomes.",
-      "Learning = consistency, curiosity, courage (not perfection)."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/H14bBuluwB8"
-    ]
-  },
-  {
-    "id": 10,
-    "title": "Applying What I’ve Learned",
-    "chips": [
-      "Next Steps",
-      "Career"
-    ],
-    "paras": [
-      "I’ll apply these lessons as I progress toward data science while serving in the military."
-    ],
-    "learned": [
-      "Maintain weekly planning and deep‑work blocks.",
-      "Proactively use Writing Center before big submissions.",
-      "Continue informational interviews and portfolio case studies."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/2Lz0VOltZKA"
-    ]
-  },
-  {
-    "id": 11,
-    "title": "Conclusion",
-    "chips": [
-      "Reflection",
-      "Purpose"
-    ],
-    "paras": [
-      "This course became a roadmap: reflect, adapt, own the next step."
-    ],
-    "learned": [
-      "I leave PACE 111T with clarity, confidence, and purpose."
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/1Y1WqYxq9kE"
-    ]
-  }
-];
+      {
+        "id": 0,
+        "title": "Introduction",
+        "chips": ["PACE 111T","Overview"],
+        "paras": [
+          "Welcome to my interactive reflection for PACE 111T. This site summarizes what I learned each week and how I’ll apply it.",
+          "Balancing academics with active-duty service pushed me to build better systems: focus blocks, smarter notes, and proactive communication."
+        ],
+        "lecture": [
+          "Orientation: What the course covers and how growth mindset fuels persistence.",
+          "Method: reflect → extract a technique → apply it in the next week."
+        ],
+        "learned": [
+          "Self-awareness is the lever for improvement.",
+          "Systems beat motivation—small, reliable habits compound."
+        ],
+        "videos": ["https://www.youtube.com/embed/KbSPPFYxx3o"]
+      },
+      {
+        "id": 1,
+        "title": "Unit 1 — Introduction & Mindset / DAACS",
+        "chips": ["Self-Awareness","DAACS"],
+        "paras": ["I used DAACS to map strengths and growth areas: study environment, test anxiety, and learning strategies."],
+        "lecture": [
+          "How DAACS domains translate into daily actions: environment, focus, metacognition.",
+          "Setting baselines and picking 1–2 habits to change first."
+        ],
+        "learned": [
+          "Identify friction points (noise, phone, unclear goals).",
+          "Track one habit for a week before stacking the next."
+        ],
+        "bullets": [
+          "Applied: ‘Do Not Disturb’, two quiet locations, pre-study checklist.",
+          "Future: re-check DAACS every term to re-calibrate."
+        ],
+        "videos": ["https://www.youtube.com/embed/PYfNA_lmkHM"]
+      },
+      {
+        "id": 2,
+        "title": "Unit 2 — Goals & Motivations (SMART)",
+        "chips": ["SMART Goals","Motivation"],
+        "paras": ["I turned intentions into SMART goals (degree by 2028, emergency fund milestones, data-career steps)."],
+        "lecture": [
+          "SMART framework: Specific, Measurable, Achievable, Relevant, Time-bound.",
+          "Tie goals to weekly actions; review on Sundays."
+        ],
+        "learned": [
+          "Clarity reduces procrastination.",
+          "Momentum comes from visible progress."
+        ],
+        "bullets": [
+          "Applied: weekly review, goal → task mapping.",
+          "Future: quarterly OKR-style revisions."
+        ],
+        "videos": ["https://www.youtube.com/embed/1-SvuFIQjK8"]
+      },
+      {
+        "id": 3,
+        "title": "Unit 3 — Big Rocks & Time Management",
+        "chips": ["Priorities","Time"],
+        "paras": ["I prioritized ‘big rocks’ and built a realistic schedule around duty shifts, schoolwork, and life."],
+        "lecture": [
+          "Time boxing, focus sprints (25–50 min), energy-aware planning.",
+          "Buffers for travel/ops and exam weeks."
+        ],
+        "learned": ["Protecting deep work hours increases quality and reduces stress."],
+        "bullets": [
+          "Applied: planner + alerts + Sunday planning.",
+          "Future: templates for heavy weeks."
+        ],
+        "videos": ["https://www.youtube.com/embed/wfsl5R0S9nQ"]
+      },
+      {
+        "id": 4,
+        "title": "Unit 4 — Engaging with My Success Network",
+        "chips": ["Support","Self-Advocacy"],
+        "paras": ["I mapped professors, tutors, advisors, and my Success Coach, and practiced concise outreach."],
+        "lecture": [
+          "Self-advocacy email formula: context → clear ask → next step.",
+          "When to contact tutoring, writing center, or professor."
+        ],
+        "learned": ["Asking early accelerates progress; silence slows it."],
+        "bullets": [
+          "Applied: 3-sentence emails and scheduled office hours.",
+          "Future: monthly check-ins and pre-deadline reviews."
+        ],
+        "videos": ["https://www.youtube.com/embed/5X3ZkV-0TtA"]
+      },
+      {
+        "id": 5,
+        "title": "Unit 5 — Informational Interview Preparation",
+        "chips": ["Career","Interview"],
+        "paras": [
+          "I researched roles and trends in data/tech and interviewed Kevin Caballero Bonilla (Senior Data Architect)."
+        ],
+        "lecture": [
+          "How to find guests, craft questions, follow up, and convert insights into action items."
+        ],
+        "learned": ["Networking turns ambiguity into direction."],
+        "bullets": [
+          "Applied: 10-question guide; concise thank-you with next steps.",
+          "Future: quarterly informational chats; CRM sheet of contacts."
+        ],
+        "videos": ["https://www.youtube.com/embed/Gb6H0ZQh4OM"]
+      },
+      {
+        "id": 6,
+        "title": "Unit 6 — Networking & Teamwork",
+        "chips": ["Teamwork","Communication"],
+        "paras": ["I translated military teamwork into academic collaboration: clear roles, trust, and short feedback loops."],
+        "lecture": [
+          "Define roles, set ‘definition of done’, run quick retrospectives."
+        ],
+        "learned": ["Responsibility + empathy = real collaboration."],
+        "bullets": [
+          "Applied: shared checklists and brief syncs.",
+          "Future: retro after each group deliverable."
+        ],
+        "videos": ["https://www.youtube.com/embed/HhHc1ZkK1Mg"]
+      },
+      {
+        "id": 7,
+        "title": "Unit 7 — Support Services",
+        "chips": ["UMGC Resources","Tools"],
+        "paras": ["I cataloged Writing Center, Career Services, UMGC Library, Microsoft 365, and tutoring resources."],
+        "lecture": [
+          "When to use which resource; building a personal ‘resource map’ at course start."
+        ],
+        "learned": ["Tools reduce friction and raise quality."],
+        "bullets": [
+          "Applied: templates and citation guides to speed drafts.",
+          "Future: resource map every term."
+        ],
+        "videos": ["https://www.youtube.com/embed/sjE1H2Pp9X8"]
+      },
+      {
+        "id": 8,
+        "title": "Unit 8 — Self-Advocacy & Communicating Needs",
+        "chips": ["Self-Advocacy","Clarity"],
+        "paras": ["I practiced respectful, proactive communication to clarify expectations early with professors and tutors."],
+        "lecture": [
+          "Boundary setting, clarity, and respectful tone. Example templates for extensions or rubric questions."
+        ],
+        "learned": ["Confidence follows clarity."],
+        "bullets": [
+          "Applied: ask when unsure; propose timelines.",
+          "Future: message template library for common scenarios."
+        ],
+        "videos": ["https://www.youtube.com/embed/E9L9QnGJm2k"]
+      },
+      {
+        "id": 9,
+        "title": "My Key Takeaways",
+        "chips": ["Growth","Habits"],
+        "paras": ["What’s sticking with me beyond this course."],
+        "learned": [
+          "Time, environment, and stress can be managed with systems.",
+          "SMART goals + discipline keep me on track.",
+          "Support networks multiply outcomes.",
+          "Learning = consistency, curiosity, courage (not perfection)."
+        ],
+        "videos": ["https://www.youtube.com/embed/H14bBuluwB8"]
+      },
+      {
+        "id": 10,
+        "title": "Applying What I’ve Learned",
+        "chips": ["Next Steps","Career"],
+        "paras": ["I’ll apply these lessons as I progress toward data science while serving in the military."],
+        "learned": [
+          "Maintain weekly planning and deep-work blocks.",
+          "Proactively use Writing Center before big submissions.",
+          "Continue informational interviews and portfolio case studies."
+        ],
+        "videos": ["https://www.youtube.com/embed/2Lz0VOltZKA"]
+      },
+      {
+        "id": 11,
+        "title": "Conclusion",
+        "chips": ["Reflection","Purpose"],
+        "paras": ["This course became a roadmap: reflect, adapt, own the next step."],
+        "learned": ["I leave PACE 111T with clarity, confidence, and purpose."],
+        "videos": ["https://www.youtube.com/embed/1Y1WqYxq9kE"]
+      }
+    ];
 
     const state = { i: 0, sfx: false };
 
@@ -415,12 +317,8 @@
 
     const sfxBtn = document.getElementById('sfx');
     const bgm = document.getElementById('bgm');
-    const bgmSrc = document.getElementById('bgm-src');
-    const bgmUrl = document.getElementById('bgm-url');
-    const bgmFile = document.getElementById('bgm-file');
-    const bgmLoad = document.getElementById('bgm-load');
 
-    // WebAudio click sfx
+    // WebAudio click SFX (opcional)
     let ctx = null;
     function ping() {
       if (!state.sfx) return;
@@ -443,21 +341,16 @@
       ping();
     });
 
-    // Audio loader
-    bgmLoad.addEventListener('click', async () => {
-      if (bgmFile.files && bgmFile.files[0]) {
-        const file = bgmFile.files[0];
-        const url = URL.createObjectURL(file);
-        bgmSrc.src = url;
-        bgm.load();
-        bgm.play().catch(()=>{});
-        return;
-      }
-      if (bgmUrl.value.trim()) {
-        bgmSrc.src = bgmUrl.value.trim();
-        bgm.load();
-        bgm.play().catch(()=>{});
-      }
+    // Autoplay compatibility: desmutear y reproducir al primer clic si hizo falta
+    document.addEventListener('DOMContentLoaded', () => {
+      const tryPlay = () => {
+        bgm.muted = false;
+        bgm.play().catch(() => {});
+        document.removeEventListener('click', tryPlay);
+      };
+      bgm.play().catch(() => {
+        document.addEventListener('click', tryPlay, { once: true });
+      });
     });
 
     function go(n) {
