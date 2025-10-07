@@ -79,7 +79,7 @@
         <h1>PACE 111T — Lessons Learned (Interactive)</h1>
         <p class="sub">Units 1–8, expanded with lecture-style summaries, concrete applications, and embedded videos.</p>
 
-        <!-- 🎵 Player: autoplay + muted (se desmutea al primer clic) -->
+        <!-- 🎵 Player: autoplay + muted (unmutes on first click) -->
         <div class="audio-ui">
           <button id="sfx" class="btn" aria-pressed="false">🔊 SFX: Off</button>
           <audio id="bgm" autoplay loop muted controls style="max-width:280px; border-radius:10px;">
@@ -118,187 +118,260 @@
   <script>
     const SECTIONS = [
       {
-        "id": 0,
-        "title": "Introduction",
-        "chips": ["PACE 111T","Overview"],
-        "paras": [
-          "Welcome to my interactive reflection for PACE 111T. This site summarizes what I learned each week and how I’ll apply it.",
-          "Balancing academics with active-duty service pushed me to build better systems: focus blocks, smarter notes, and proactive communication."
+        id: 0,
+        title: "Introduction",
+        chips: ["PACE 111T","Overview"],
+        paras: [
+          "Welcome to my interactive recap of PACE 111T. Across eight weeks, I learned to study with intention: design my environment, manage time deliberately, and ask for help early.",
+          "While serving on active duty as a U.S. Marine, I adopted a “systems over willpower” approach: focused work blocks, weekly planning, and proactive communication with my support network."
         ],
-        "lecture": [
-          "Orientation: What the course covers and how growth mindset fuels persistence.",
-          "Method: reflect → extract a technique → apply it in the next week."
+        lecture: [
+          "Course map: learning habits, SMART goals, time management, success network, informational interview, networking, and self-advocacy.",
+          "Continuous-improvement loop: observe → extract one technique → apply it next unit."
         ],
-        "learned": [
-          "Self-awareness is the lever for improvement.",
-          "Systems beat motivation—small, reliable habits compound."
+        learned: [
+          "Self-awareness is the leverage point for growth.",
+          "Small, consistent systems outperform sporadic motivation."
         ],
-        "videos": ["https://www.youtube.com/embed/KbSPPFYxx3o"]
+        videos: ["https://www.youtube.com/embed/KbSPPFYxx3o"]
       },
+
       {
-        "id": 1,
-        "title": "Unit 1 — Introduction & Mindset / DAACS",
-        "chips": ["Self-Awareness","DAACS"],
-        "paras": ["I used DAACS to map strengths and growth areas: study environment, test anxiety, and learning strategies."],
-        "lecture": [
-          "How DAACS domains translate into daily actions: environment, focus, metacognition.",
-          "Setting baselines and picking 1–2 habits to change first."
+        id: 1,
+        title: "Unit 1 — Introduction & Mindset / DAACS",
+        chips: ["Self-Awareness","DAACS","Mindset"],
+        paras: [
+          "DAACS gave me a baseline: study environment, pre-exam anxiety, and strategies to understand material more effectively. From there, I picked 1–2 specific habits per week and iterated.",
+          "To frame the topic, I revisited <a href='https://ed.ted.com/lessons/what-is-imposter-syndrome-and-how-can-you-combat-it-elizabeth-cox' target='_blank' rel='noopener noreferrer'>Elizabeth Cox’s TED-Ed lesson on imposter syndrome</a> and refreshed growth-mindset concepts. To reduce writing friction, I worked in <a href='https://www.microsoft.com/en-us/microsoft-365/word' target='_blank' rel='noopener noreferrer'>Word for the web</a> (dictation, Editor, Read Aloud)."
         ],
-        "learned": [
-          "Identify friction points (noise, phone, unclear goals).",
-          "Track one habit for a week before stacking the next."
+        lecture: [
+          "Translate DAACS domains into daily actions: environment (silence, DND, checklist), focus (25–50-minute blocks), metacognition (before/during/after).",
+          "Use Word as a toolkit to increase clarity and drafting speed."
         ],
-        "bullets": [
-          "Applied: ‘Do Not Disturb’, two quiet locations, pre-study checklist.",
-          "Future: re-check DAACS every term to re-calibrate."
+        learned: [
+          "Spotting friction points (noise, phone, fuzzy goals) speeds progress.",
+          "Tracking one habit for a week keeps change measurable and sustainable."
         ],
-        "videos": ["https://www.youtube.com/embed/PYfNA_lmkHM"]
+        bullets: [
+          "Applied: Do Not Disturb + two quiet locations + pre-study checklist.",
+          "Next: re-check DAACS each term to recalibrate."
+        ],
+        videos: ["https://www.youtube.com/embed/aAygomQG1bY"]
       },
+
       {
-        "id": 2,
-        "title": "Unit 2 — Goals & Motivations (SMART)",
-        "chips": ["SMART Goals","Motivation"],
-        "paras": ["I turned intentions into SMART goals (degree by 2028, emergency fund milestones, data-career steps)."],
-        "lecture": [
-          "SMART framework: Specific, Measurable, Achievable, Relevant, Time-bound.",
-          "Tie goals to weekly actions; review on Sundays."
+        id: 2,
+        title: "Unit 2 — Goals & Motivations (SMART)",
+        chips: ["SMART Goals","Motivation","Values"],
+        paras: [
+          "I converted intentions into SMART goals (e.g., complete my degree by 2028; emergency-fund milestones; steps toward data science). Stories of students and athletes reminded me that clarity sustains discipline.",
+          "I aligned values with goals and grounded them in weekly actions. For execution, I hold a Sunday review and schedule focus blocks with <a href='https://support.microsoft.com/en-us/office/calendar-in-outlook-0d1a2d6c-81aa-42fe-9a97-39c9d8a7d1a0' target='_blank' rel='noopener noreferrer'>Outlook Calendar</a>."
         ],
-        "learned": [
-          "Clarity reduces procrastination.",
-          "Momentum comes from visible progress."
+        lecture: [
+          "SMART: Specific, Measurable, Achievable, Relevant, Time-bound.",
+          "From goal to agenda: break down by weeks, review on Sundays, adjust for energy and context."
         ],
-        "bullets": [
-          "Applied: weekly review, goal → task mapping.",
-          "Future: quarterly OKR-style revisions."
+        learned: [
+          "Clarity reduces procrastination: seeing the next step removes the block.",
+          "Motivation renews when you notice visible micro-progress."
         ],
-        "videos": ["https://www.youtube.com/embed/1-SvuFIQjK8"]
+        bullets: [
+          "Applied: Sunday review + goal→task mapping.",
+          "Next: quarterly mini-OKRs to sharpen focus."
+        ],
+        videos: [
+          "https://www.youtube.com/embed/SGNaZHfwe2s",
+          "https://www.youtube.com/embed/MlLFg6CETp4"
+        ]
       },
+
       {
-        "id": 3,
-        "title": "Unit 3 — Big Rocks & Time Management",
-        "chips": ["Priorities","Time"],
-        "paras": ["I prioritized ‘big rocks’ and built a realistic schedule around duty shifts, schoolwork, and life."],
-        "lecture": [
-          "Time boxing, focus sprints (25–50 min), energy-aware planning.",
-          "Buffers for travel/ops and exam weeks."
+        id: 3,
+        title: "Unit 3 — Big Rocks & Time Management",
+        chips: ["Priorities","Time"],
+        paras: [
+          "I prioritize my “big rocks” (family, service, study) and build the rest around them. In practice: time-boxing, focus sprints, and buffers for heavy weeks or shift changes.",
+          "I learned to distinguish workload from available energy. A realistic weekly plan lowers stress and raises quality. I also relied on <a href='https://support.microsoft.com/en-us/office/outlook-calendar-overview-7c942f20-9ad7-4c08-9a7b-3f5ab0f5b7e7' target='_blank' rel='noopener noreferrer'>Outlook calendar guides</a> and proven productivity approaches."
         ],
-        "learned": ["Protecting deep work hours increases quality and reduces stress."],
-        "bullets": [
+        lecture: [
+          "Time-boxing + extended Pomodoro (25–50 minutes) with active breaks.",
+          "Calendar hygiene: color categories, reminders, and recurring events."
+        ],
+        learned: [
+          "Protecting deep-work hours improves comprehension and prevents last-minute rushes."
+        ],
+        bullets: [
           "Applied: planner + alerts + Sunday planning.",
-          "Future: templates for heavy weeks."
+          "Next: templates for exam weeks or duty rotations."
         ],
-        "videos": ["https://www.youtube.com/embed/wfsl5R0S9nQ"]
+        videos: [
+          "https://www.youtube.com/embed/wxLLfkHdJ2o",
+          "https://www.youtube.com/embed/arj7oStGLkU"
+        ]
       },
+
       {
-        "id": 4,
-        "title": "Unit 4 — Engaging with My Success Network",
-        "chips": ["Support","Self-Advocacy"],
-        "paras": ["I mapped professors, tutors, advisors, and my Success Coach, and practiced concise outreach."],
-        "lecture": [
-          "Self-advocacy email formula: context → clear ask → next step.",
-          "When to contact tutoring, writing center, or professor."
+        id: 4,
+        title: "Unit 4 — Engaging with My Success Network",
+        chips: ["Support","Self-Advocacy"],
+        paras: [
+          "I mapped my Success Coach, tutors, advisors, and professors. I practiced three-sentence emails: clear context, specific ask, and a proposed next step.",
+          "UMGC resources I now integrate: <a href='https://www.umgc.edu/current-students/learning-resources/writing-center' target='_blank' rel='noopener noreferrer'>Online Writing Center</a>, <a href='https://www.umgc.edu/current-students/learning-resources/tutoring/undergraduate-tutoring' target='_blank' rel='noopener noreferrer'>Tutoring</a>, <a href='https://www.umgc.edu/current-students/library' target='_blank' rel='noopener noreferrer'>Library</a>, and <a href='https://www.umgc.edu/current-students/career-services' target='_blank' rel='noopener noreferrer'>Career Services</a>."
         ],
-        "learned": ["Asking early accelerates progress; silence slows it."],
-        "bullets": [
-          "Applied: 3-sentence emails and scheduled office hours.",
-          "Future: monthly check-ins and pre-deadline reviews."
+        lecture: [
+          "Self-advocacy template: context → precise question → realistic timeline proposal.",
+          "Use the degree audit/AAR as a map to sequence courses intentionally."
         ],
-        "videos": ["https://www.youtube.com/embed/5X3ZkV-0TtA"]
+        learned: [
+          "Asking early accelerates learning; silence slows it down."
+        ],
+        bullets: [
+          "Applied: scheduled office hours + pre-deadline reviews.",
+          "Next: monthly check-ins with my support network."
+        ],
+        videos: []
       },
+
       {
-        "id": 5,
-        "title": "Unit 5 — Informational Interview Preparation",
-        "chips": ["Career","Interview"],
-        "paras": [
-          "I researched roles and trends in data/tech and interviewed Kevin Caballero Bonilla (Senior Data Architect)."
+        id: 5,
+        title: "Unit 5 — Informational Interview Preparation",
+        chips: ["Career","Interview","Labor Market"],
+        paras: [
+          "I prepared with research, an interview guide, and a follow-up note (gratitude + next steps). Speaking with a Senior Data Architect reinforced the importance of problem-solving and adaptability.",
+          "To explore roles and skills, I used <a href='https://www.onetonline.org/' target='_blank' rel='noopener noreferrer'>O*NET Online</a> and <a href='https://www.umgc.edu/current-students/career-services' target='_blank' rel='noopener noreferrer'>UMGC Career Services</a>. I treat generative AI ethically—as a starting point for ideation and trend-mapping."
         ],
-        "lecture": [
-          "How to find guests, craft questions, follow up, and convert insights into action items."
+        lecture: [
+          "Before: research person/role, set 3 objectives, draft 10 open-ended questions.",
+          "After: convert insights into action (skills to practice, portfolio projects to build)."
         ],
-        "learned": ["Networking turns ambiguity into direction."],
-        "bullets": [
-          "Applied: 10-question guide; concise thank-you with next steps.",
-          "Future: quarterly informational chats; CRM sheet of contacts."
+        learned: [
+          "Networking turns ambiguity into actionable direction."
         ],
-        "videos": ["https://www.youtube.com/embed/Gb6H0ZQh4OM"]
+        bullets: [
+          "Applied: 10-question guide + concise thank-you with follow-up.",
+          "Next: one informational interview per quarter + living contacts sheet."
+        ],
+        videos: [
+          "https://www.youtube.com/embed/6sITr5V1XdE"
+        ]
       },
+
       {
-        "id": 6,
-        "title": "Unit 6 — Networking & Teamwork",
-        "chips": ["Teamwork","Communication"],
-        "paras": ["I translated military teamwork into academic collaboration: clear roles, trust, and short feedback loops."],
-        "lecture": [
-          "Define roles, set ‘definition of done’, run quick retrospectives."
+        id: 6,
+        title: "Unit 6 — Networking & Teamwork",
+        chips: ["Teamwork","Communication"],
+        paras: [
+          "I translated military practices into academic collaboration: clear roles, trust, and short feedback loops.",
+          "We agreed on a “definition of done,” shared checklists, and brief retrospectives after each group deliverable."
         ],
-        "learned": ["Responsibility + empathy = real collaboration."],
-        "bullets": [
-          "Applied: shared checklists and brief syncs.",
-          "Future: retro after each group deliverable."
+        lecture: [
+          "Lightweight RACI roles, communication agreements, and a single channel for decisions.",
+          "Mini-retro: What to keep? What to improve? What to try next?"
         ],
-        "videos": ["https://www.youtube.com/embed/HhHc1ZkK1Mg"]
+        learned: [
+          "Responsibility + empathy = real, sustainable collaboration."
+        ],
+        bullets: [
+          "Applied: shared checklists + weekly micro-syncs.",
+          "Next: 10-minute retro after each team submission."
+        ],
+        videos: [
+          "https://www.youtube.com/embed/HhHc1ZkK1Mg"
+        ]
       },
+
       {
-        "id": 7,
-        "title": "Unit 7 — Support Services",
-        "chips": ["UMGC Resources","Tools"],
-        "paras": ["I cataloged Writing Center, Career Services, UMGC Library, Microsoft 365, and tutoring resources."],
-        "lecture": [
-          "When to use which resource; building a personal ‘resource map’ at course start."
+        id: 7,
+        title: "Unit 7 — Support Services",
+        chips: ["UMGC Resources","Tools","Academic Integrity"],
+        paras: [
+          "I built my personal “resource map”: <a href='https://www.umgc.edu/current-students/learning-resources/writing-center' target='_blank' rel='noopener noreferrer'>Writing Center</a>, <a href='https://www.umgc.edu/current-students/learning-resources/tutoring/undergraduate-tutoring' target='_blank' rel='noopener noreferrer'>Tutoring</a>, <a href='https://www.umgc.edu/current-students/library' target='_blank' rel='noopener noreferrer'>Library</a>, <a href='https://www.umgc.edu/current-students/career-services' target='_blank' rel='noopener noreferrer'>Career Services</a>, and Microsoft 365.",
+          "<strong>Turnitin</strong> is a learning tool: the similarity report guides voice and citation—not just policing. Reading it well made my writing stronger and more original."
         ],
-        "learned": ["Tools reduce friction and raise quality."],
-        "bullets": [
-          "Applied: templates and citation guides to speed drafts.",
-          "Future: resource map every term."
+        lecture: [
+          "When to use each service and how to integrate it in your flow (e.g., submit drafts to the Writing Center a week early).",
+          "Turnitin: myths vs. realities and how to interpret the similarity report."
         ],
-        "videos": ["https://www.youtube.com/embed/sjE1H2Pp9X8"]
+        learned: [
+          "Leveraging resources is not optional—it’s strategic intelligence."
+        ],
+        bullets: [
+          "Applied: templates, citation guides, and Turnitin pre-checks.",
+          "Next: create a “resource map” at the start of every term."
+        ],
+        videos: [
+          "https://www.youtube.com/embed/vtGQ5Mcx0NQ",
+          "https://www.youtube.com/embed/5hfOvacOR_A"
+        ]
       },
+
       {
-        "id": 8,
-        "title": "Unit 8 — Self-Advocacy & Communicating Needs",
-        "chips": ["Self-Advocacy","Clarity"],
-        "paras": ["I practiced respectful, proactive communication to clarify expectations early with professors and tutors."],
-        "lecture": [
-          "Boundary setting, clarity, and respectful tone. Example templates for extensions or rubric questions."
+        id: 8,
+        title: "Unit 8 — Self-Advocacy & Communicating Needs",
+        chips: ["Self-Advocacy","Clarity"],
+        paras: [
+          "I practiced respectful, clear messages to ask for clarification or negotiate timelines early—taking shared responsibility for outcomes.",
+          "Commencement stories reinforce what matters: persist with purpose and ask for support when needed. For style questions, I also consult the <a href='https://www.umgc.edu/current-students/learning-resources/writing-center' target='_blank' rel='noopener noreferrer'>Writing Center</a> and <a href='https://www.umgc.edu/current-students/library' target='_blank' rel='noopener noreferrer'>Library</a> guides."
         ],
-        "learned": ["Confidence follows clarity."],
-        "bullets": [
-          "Applied: ask when unsure; propose timelines.",
-          "Future: message template library for common scenarios."
+        lecture: [
+          "Templates for rubric questions, justified requests, and realistic timeline proposals.",
+          "Tone: respect + specificity + concrete next steps."
         ],
-        "videos": ["https://www.youtube.com/embed/E9L9QnGJm2k"]
+        learned: [
+          "Confidence follows clarity—especially when you communicate early."
+        ],
+        bullets: [
+          "Applied: ask as soon as uncertainty appears; propose options and dates.",
+          "Next: build a small library of message templates for common scenarios."
+        ],
+        videos: []
       },
+
       {
-        "id": 9,
-        "title": "My Key Takeaways",
-        "chips": ["Growth","Habits"],
-        "paras": ["What’s sticking with me beyond this course."],
-        "learned": [
-          "Time, environment, and stress can be managed with systems.",
-          "SMART goals + discipline keep me on track.",
+        id: 9,
+        title: "My Key Takeaways",
+        chips: ["Growth","Habits"],
+        paras: [
+          "What sticks beyond this course: systems, networks, and a continuous-learning mindset.",
+          "My frame shifted—from “just get through” to deliberately investing in my growth as a student and professional."
+        ],
+        learned: [
+          "Time, environment, and stress are manageable with systems.",
+          "SMART goals + weekly discipline keep me on course.",
           "Support networks multiply outcomes.",
-          "Learning = consistency, curiosity, courage (not perfection)."
+          "Learning = consistency, curiosity, and courage—not perfection."
         ],
-        "videos": ["https://www.youtube.com/embed/H14bBuluwB8"]
+        videos: ["https://www.youtube.com/embed/H14bBuluwB8"]
       },
+
       {
-        "id": 10,
-        "title": "Applying What I’ve Learned",
-        "chips": ["Next Steps","Career"],
-        "paras": ["I’ll apply these lessons as I progress toward data science while serving in the military."],
-        "learned": [
-          "Maintain weekly planning and deep-work blocks.",
-          "Proactively use Writing Center before big submissions.",
-          "Continue informational interviews and portfolio case studies."
+        id: 10,
+        title: "Applying What I’ve Learned",
+        chips: ["Next Steps","Career"],
+        paras: [
+          "I’ll apply these lessons as I move toward data science while serving: weekly planning, deep-work blocks, and a living portfolio.",
+          "I’ll continue informational interviews and use <a href='https://www.onetonline.org/' target='_blank' rel='noopener noreferrer'>O*NET</a> and <a href='https://www.umgc.edu/current-students/career-services' target='_blank' rel='noopener noreferrer'>UMGC Career Services</a> to align skills with opportunities."
         ],
-        "videos": ["https://www.youtube.com/embed/2Lz0VOltZKA"]
+        learned: [
+          "Maintain planning and review rituals.",
+          "Use the Writing Center before major submissions.",
+          "Turn interviews into concrete portfolio projects."
+        ],
+        videos: ["https://www.youtube.com/embed/2Lz0VOltZKA"]
       },
+
       {
-        "id": 11,
-        "title": "Conclusion",
-        "chips": ["Reflection","Purpose"],
-        "paras": ["This course became a roadmap: reflect, adapt, own the next step."],
-        "learned": ["I leave PACE 111T with clarity, confidence, and purpose."],
-        "videos": ["https://www.youtube.com/embed/1Y1WqYxq9kE"]
+        id: 11,
+        title: "Conclusion",
+        chips: ["Reflection","Purpose"],
+        paras: [
+          "PACE 111T became a roadmap: observe, adapt, and own the next step. Balancing service and study confirmed that organization and self-advocacy sustain progress.",
+          "I’m leaving with clarity, confidence, and purpose for what’s next."
+        ],
+        learned: [
+          "Improvement is deliberate and built week by week."
+        ],
+        videos: ["https://www.youtube.com/embed/1Y1WqYxq9kE"]
       }
     ];
 
@@ -318,7 +391,7 @@
     const sfxBtn = document.getElementById('sfx');
     const bgm = document.getElementById('bgm');
 
-    // WebAudio click SFX (opcional)
+    // WebAudio click SFX (optional)
     let ctx = null;
     function ping() {
       if (!state.sfx) return;
@@ -341,7 +414,7 @@
       ping();
     });
 
-    // Autoplay compatibility: desmutear y reproducir al primer clic si hizo falta
+    // Autoplay compatibility: unmute and play on first click if needed
     document.addEventListener('DOMContentLoaded', () => {
       const tryPlay = () => {
         bgm.muted = false;
@@ -380,25 +453,26 @@
       (u.chips || []).forEach(t => { const el = document.createElement('span'); el.className='chip'; el.textContent=t; chips.appendChild(el); });
       content.innerHTML = '';
 
+      // allow <a> within paras/lecture/learned/bullets
       if (u.paras) {
-        u.paras.forEach(p => { const el = document.createElement('p'); el.className='lead'; el.textContent = p; content.appendChild(el); });
+        u.paras.forEach(p => { const el = document.createElement('p'); el.className='lead'; el.innerHTML = p; content.appendChild(el); });
       }
       if (u.lecture) {
         const h = document.createElement('p'); h.innerHTML = '<strong>Class-style summary:</strong>';
         const ul = document.createElement('ul');
-        u.lecture.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        u.lecture.forEach(line => { const li = document.createElement('li'); li.innerHTML = line; ul.appendChild(li); });
         content.appendChild(h); content.appendChild(ul);
       }
       if (u.learned) {
         const h = document.createElement('p'); h.innerHTML = '<strong>What I learned:</strong>';
         const ul = document.createElement('ul');
-        u.learned.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        u.learned.forEach(line => { const li = document.createElement('li'); li.innerHTML = line; ul.appendChild(li); });
         content.appendChild(h); content.appendChild(ul);
       }
       if (u.bullets) {
         const h = document.createElement('p'); h.innerHTML = '<strong>Applied / Future:</strong>';
         const ul = document.createElement('ul');
-        u.bullets.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        u.bullets.forEach(line => { const li = document.createElement('li'); li.innerHTML = line; ul.appendChild(li); });
         content.appendChild(h); content.appendChild(ul);
       }
 
