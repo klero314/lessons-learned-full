@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unit 8: Lessons Learned — Desler A. Fletes Bonilla</title>
+  <meta name="description" content="Interactive reflection for PACE 111T Units 1–8 by Desler Antonio Fletes Bonilla.">
+  <style>
+    :root {
+      --bg: #0d1117; --bg2:#0b0f14; --card:#121826; --ink:#e6edf3; --muted:#9fb1c3;
+      --accent:#7dd3fc; --brand:#34d399; --ring: rgba(125,211,252,.35);
+      --shadow:0 12px 40px rgba(0,0,0,.35); --radius:18px;
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      background:
+        radial-gradient(1400px 700px at -20% -20%, #141b2a, transparent 60%),
+        radial-gradient(1000px 600px at 120% 0%, #0f1522, transparent 60%),
+        var(--bg);
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none }
+    a:hover { opacity:.9; text-decoration: underline }
+    .wrap { max-width: 1150px; margin: 0 auto; padding: 28px 20px 64px }
+    header { display:flex; gap: 20px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; margin-bottom: 24px }
+    h1 { margin: 0; font-size: clamp(28px, 3vw, 42px); line-height: 1.1 }
+    .sub { color: var(--muted); margin-top: 6px; max-width: 72ch }
+    .progress { width: 280px; min-width: 220px }
+    .bar { height: 12px; background:#1f2636; border-radius:999px; overflow:hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,.04) }
+    .bar>i { display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--brand), var(--accent)); transition: width .35s ease }
+    .meta { display:flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-bottom: 6px }
+    .grid { display:grid; gap:14px; grid-template-columns: repeat(2, 1fr) }
+    @media (min-width: 860px) { .grid { grid-template-columns: repeat(4, 1fr) } }
+    .pill {
+      position:relative; background: linear-gradient(180deg, #121827, #0e1421);
+      border:1px solid #20273a; border-radius: 14px; padding:12px 12px;
+      color: var(--ink); text-align:left; cursor:pointer; box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .pill:hover { transform: translateY(-1px) }
+    .pill[aria-current="true"] { border-color:#33415e; outline: 2px solid var(--ring) }
+    .pill .dot { width:8px; height:8px; border-radius:50%; background: var(--accent); display:inline-block; margin-right:8px }
+    .card {
+      position:relative; margin-top:20px; background: linear-gradient(180deg, #101827, #0b1220);
+      border:1px solid #1f2636; border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);
+    }
+    .card .hero {
+      position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(700px 300px at 10% 0%, rgba(141,211,255,.10), transparent 60%),
+        radial-gradient(600px 300px at 100% 100%, rgba(52,211,153,.08), transparent 60%);
+      opacity:.9;
+    }
+    .card .inner { position:relative; padding:28px 24px 28px }
+    h2 { margin:0 0 10px; font-size: clamp(22px, 2.2vw, 30px) }
+    .chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px }
+    .chip { font-size:12px; padding:4px 8px; border-radius:999px; background:#0b0f1a; border:1px solid #232b3e; color:#c6d4ee }
+    ul { margin:0; padding-left:20px }
+    li { margin:7px 0 }
+    p { margin:12px 0 }
+    .cta { display:inline-flex; gap:10px; align-items:center; margin-top:18px; padding:10px 14px; border-radius:12px; border:1px solid #27314b; background:#0b0f1a; color:var(--ink) }
+    .cta:hover { border-color:#364164; transform: translateY(-1px) }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:18px 0 8px }
+    .btn { padding:10px 14px; border-radius:12px; border:1px solid #232b3e; background:#0b0f1a; color:var(--ink) }
+    .btn[disabled] { opacity:.4; cursor:not-allowed }
+    footer { color:var(--muted); font-size:12px; margin-top:20px }
+    .count { color:var(--muted); font-size:13px }
+    .lead { color:#c9d3ee }
+    .audio-ui { display:flex; gap:10px; align-items:center }
+    .kbd { font-size:11px; padding:2px 6px; border-radius:6px; border:1px solid #26314b; background:#0b0f1a; color:#cbd5e1 }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Unit 8: Lessons Learned — Reflection by Desler Antonio Fletes Bonilla</h1>
+        <p class="sub">An interactive, professional one-page experience summarizing Units 1–8 from PACE 111T, plus key takeaways, applications, and conclusion.</p>
+        <div class="audio-ui" style="margin-top:10px">
+          <button id="sfx" class="btn" aria-pressed="false">🔊 SFX: Off</button>
+          <audio id="bgm" preload="none" loop controls style="max-width:280px">
+            <!-- Replace src with a CC0/royalty-free lo‑fi track URL (e.g., from Pixabay) -->
+            <source src="" type="audio/mpeg">
+          </audio>
+          <span class="kbd">Tip: Press ← / → to navigate</span>
+        </div>
+      </div>
+      <div class="progress" aria-label="progress">
+        <div class="meta"><span>Progress</span><span id="pct">0%</span></div>
+        <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+    </header>
+
+    <section class="nav">
+      <button id="prev" class="btn" aria-label="Previous section">← Previous</button>
+      <div class="count"><span id="pos">1</span> / 12</div>
+      <button id="next" class="btn" aria-label="Next section">Next →</button>
+    </section>
+
+    <section id="grid" class="grid" aria-label="Quick navigation"></section>
+
+    <article class="card" aria-live="polite">
+      <div class="hero"></div>
+      <div class="inner">
+        <div class="chips" id="chips"></div>
+        <h2 id="title"></h2>
+        <div id="content"></div>
+        <a id="cta" class="cta" target="_blank" rel="noopener noreferrer" hidden>Open resource ↗</a>
+      </div>
+    </article>
+
+    <footer>Host on GitHub Pages. Edit content in the <code>SECTIONS</code> array below. For music, use CC0/royalty-free sources and give attribution if required.</footer>
+  </div>
+
+  <script>
+    // Content
+    const SECTIONS = [
+  {
+    "id": 0,
+    "title": "Introduction",
+    "chips": [
+      "PACE 111T",
+      "Overview"
+    ],
+    "paras": [
+      {
+        "text": "As I look back on these eight weeks in PACE 111T – Program and Career Exploration in Technology, I realize how much I’ve grown both as a student and as a professional."
+      },
+      {
+        "text": "Balancing my academic work with my duties as an active-duty U.S. Marine has not been easy, but this course taught me to be more strategic, self-aware, and organized."
+      },
+      {
+        "text": "Each unit helped me build habits and mindsets that I’ll carry into my future studies and my career in data science and technology."
+      }
+    ],
+    "bullets": null,
+    "cta": null
+  },
+  {
+    "id": 1,
+    "title": "Unit 1 — Introduction & Mindset / DAACS",
+    "chips": [
+      "Self‑Awareness",
+      "DAACS"
+    ],
+    "paras": [
+      {
+        "text": "The DAACS assessment surfaced growth areas: environment management, reducing test anxiety, and learning strategies."
+      },
+      {
+        "text": "I created routines that fit my unpredictable schedule and started tracking my study habits."
+      }
+    ],
+    "bullets": [
+      "What I learned: self-knowledge is the starting point.",
+      "How I applied it: set ‘do not disturb’, picked 2–3 quiet study spots, and blocked time.",
+      "Future use: keep revisiting DAACS domains each term to tune habits."
+    ],
+    "cta": {
+      "label": "DAACS Portal",
+      "url": "https://umgc.daacs.net/"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Unit 2 — Goals & Motivations (SMART)",
+    "chips": [
+      "SMART Goals",
+      "Motivation"
+    ],
+    "paras": [
+      {
+        "text": "I translated intentions into SMART goals (degree by 2028, build emergency fund, steps toward data roles)."
+      }
+    ],
+    "bullets": [
+      "What I learned: clarity beats intensity; small wins compound.",
+      "How I applied it: weekly checkpoint to connect tasks → goals.",
+      "Future use: quarterly OKR-style review to realign school, work, and life."
+    ],
+    "cta": null
+  },
+  {
+    "id": 3,
+    "title": "Unit 3 — Big Rocks & Organizing Your Schedule",
+    "chips": [
+      "Priorities",
+      "Time"
+    ],
+    "paras": [
+      {
+        "text": "I prioritized ‘big rocks’ and built a realistic weekly plan with buffers around duty shifts and life."
+      }
+    ],
+    "bullets": [
+      "What I learned: time is a resource—protect focus blocks.",
+      "How I applied it: planner + calendar alerts + Sunday planning session.",
+      "Future use: template schedules for exam weeks and travel/field ops."
+    ],
+    "cta": null
+  },
+  {
+    "id": 4,
+    "title": "Unit 4 — Engaging with My Success Network",
+    "chips": [
+      "Support",
+      "Self‑Advocacy"
+    ],
+    "paras": [
+      {
+        "text": "I mapped professors, tutors, advisors, and my Success Coach and practiced concise outreach."
+      }
+    ],
+    "bullets": [
+      "What I learned: asking early accelerates progress.",
+      "How I applied it: 3-sentence emails (context, question, next step).",
+      "Future use: monthly check-ins with Success Coach and Writing Center before major deliverables."
+    ],
+    "cta": {
+      "label": "UMGC Tutoring",
+      "url": "https://www.umgc.edu/current-students/learning-resources/tutoring/undergraduate-tutoring"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Unit 5 — Informational Interview Preparation",
+    "chips": [
+      "Career",
+      "Interview"
+    ],
+    "paras": [
+      {
+        "text": "I prepared questions and researched roles and trends in data/tech."
+      },
+      {
+        "text": "My interview with Kevin Caballero Bonilla (Senior Data Architect) highlighted problem-solving and adaptability."
+      }
+    ],
+    "bullets": [
+      "What I learned: networking turns ambiguity into direction.",
+      "How I applied it: built a 10-question guide; followed up with a concise thank-you + action items.",
+      "Future use: schedule quarterly informational chats; track contacts in a simple CRM sheet."
+    ],
+    "cta": null
+  },
+  {
+    "id": 6,
+    "title": "Unit 6 — Networking & Teamwork",
+    "chips": [
+      "Teamwork",
+      "Communication"
+    ],
+    "paras": [
+      {
+        "text": "I reframed military teamwork skills for academic projects: clear roles, trust, feedback loops."
+      }
+    ],
+    "bullets": [
+      "What I learned: responsibility + empathy = real collaboration.",
+      "How I applied it: set definitions of done, used shared checklists, and kept updates short and regular.",
+      "Future use: apply retrospectives after group work to capture improvements."
+    ],
+    "cta": null
+  },
+  {
+    "id": 7,
+    "title": "Unit 7 — Support Services",
+    "chips": [
+      "UMGC Resources",
+      "Tools"
+    ],
+    "paras": [
+      {
+        "text": "I cataloged resources: Online Writing Center, Career Services, UMGC Library, Microsoft 365, tutoring."
+      }
+    ],
+    "bullets": [
+      "What I learned: tools reduce friction and increase quality.",
+      "How I applied it: used templates and citation guides to speed up drafts.",
+      "Future use: create a personal ‘resource map’ at the start of every course."
+    ],
+    "cta": null
+  },
+  {
+    "id": 8,
+    "title": "Unit 8 — Self‑Advocacy & Communicating Needs",
+    "chips": [
+      "Self‑Advocacy",
+      "Clarity"
+    ],
+    "paras": [
+      {
+        "text": "I practiced respectful, proactive communication with professors and tutors to clarify expectations early."
+      }
+    ],
+    "bullets": [
+      "What I learned: confidence follows clarity.",
+      "How I applied it: when unsure—ask; propose next steps and timelines.",
+      "Future use: keep a message template library for common scenarios (extensions, rubric questions, feedback requests)."
+    ],
+    "cta": null
+  },
+  {
+    "id": 9,
+    "title": "My Key Takeaways",
+    "chips": [
+      "Growth",
+      "Habits"
+    ],
+    "paras": [
+      {
+        "text": "I’ve learned to manage my time, environment, and stress more effectively."
+      }
+    ],
+    "bullets": [
+      "SMART goals + discipline keep me on track.",
+      "Connections and support are essential for long-term success.",
+      "Learning is consistency, curiosity, and courage—not perfection."
+    ],
+    "cta": null
+  },
+  {
+    "id": 10,
+    "title": "Applying What I’ve Learned",
+    "chips": [
+      "Next Steps",
+      "Career"
+    ],
+    "paras": [
+      {
+        "text": "I’ll apply these lessons as I progress toward a career in data science while serving in the military."
+      }
+    ],
+    "bullets": [
+      "Maintain weekly planning and deep-work blocks.",
+      "Use UMGC resources proactively (Writing Center before big submissions).",
+      "Continue informational interviews and portfolio building (case studies, reflections)."
+    ],
+    "cta": null
+  },
+  {
+    "id": 11,
+    "title": "Conclusion",
+    "chips": [
+      "Reflection",
+      "Purpose"
+    ],
+    "paras": [
+      {
+        "text": "This course has been a roadmap—each week challenged me to reflect, adapt, and own my trajectory."
+      }
+    ],
+    "bullets": [
+      "I leave PACE 111T with clarity, confidence, and purpose."
+    ],
+    "cta": null
+  }
+];
+
+    // State
+    const state = { i: 0, sfx: false };
+
+    // Elements
+    const grid = document.getElementById('grid');
+    const title = document.getElementById('title');
+    const content = document.getElementById('content');
+    const cta = document.getElementById('cta');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const pos = document.getElementById('pos');
+    const bar = document.getElementById('bar');
+    const pct = document.getElementById('pct');
+    const chips = document.getElementById('chips');
+    const sfxBtn = document.getElementById('sfx');
+
+    // WebAudio SFX (no external assets)
+    let ctx = null;
+    function ping() {
+      if (!state.sfx) return;
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.value = 0.0001; // start quiet
+      o.connect(g); g.connect(ctx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.06, ctx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
+      o.stop(ctx.currentTime + 0.13);
+    }
+
+    sfxBtn.addEventListener('click', ()=>{
+      state.sfx = !state.sfx;
+      sfxBtn.setAttribute('aria-pressed', String(state.sfx));
+      sfxBtn.textContent = state.sfx ? '🔊 SFX: On' : '🔇 SFX: Off';
+      ping();
+    });
+
+    function go(n) {
+      const clamped = Math.max(0, Math.min(SECTIONS.length - 1, n));
+      if (clamped !== state.i) { state.i = clamped; render(); ping(); window.scrollTo({top:0, behavior:'smooth'}); }
+    }
+    function nextSec() { go(state.i + 1); }
+    function prevSec() { go(state.i - 1); }
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      SECTIONS.forEach((u, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pill';
+        b.setAttribute('aria-current', i === state.i ? 'true' : 'false');
+        b.innerHTML = `<span class="dot"></span><span>${u.title}</span>`;
+        b.addEventListener('click', () => go(i));
+        grid.appendChild(b);
+      });
+    }
+
+    function renderSection() {
+      const u = SECTIONS[state.i];
+      title.textContent = u.title;
+      chips.innerHTML = '';
+      (u.chips || []).forEach(t => { const el = document.createElement('span'); el.className='chip'; el.textContent=t; chips.appendChild(el); });
+      content.innerHTML = '';
+
+      if (u.paras) {
+        u.paras.forEach(p => { const el = document.createElement('p'); el.className='lead'; el.textContent = p.text; content.appendChild(el); });
+      }
+      if (u.bullets) {
+        const ul = document.createElement('ul');
+        u.bullets.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        content.appendChild(ul);
+      }
+      if (u.cta && u.cta.url) {
+        cta.hidden = false;
+        cta.textContent = u.cta.label + ' ↗';
+        cta.setAttribute('href', u.cta.url);
+      } else {
+        cta.hidden = true;
+        cta.removeAttribute('href');
+      }
+    }
+
+    function renderNav() {
+      prev.disabled = state.i === 0;
+      next.disabled = state.i === SECTIONS.length - 1;
+      pos.textContent = String(state.i + 1);
+    }
+
+    function renderProgress() {
+      const p = Math.round(((state.i + 1) / SECTIONS.length) * 100);
+      bar.style.width = p + '%'; pct.textContent = p + '%';
+    }
+
+    function render() {
+      renderGrid(); renderSection(); renderNav(); renderProgress();
+    }
+
+    prev.addEventListener('click', prevSec);
+    next.addEventListener('click', nextSec);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSec();
+      if (e.key === 'ArrowLeft') prevSec();
+    });
+
+    // Prevent accidental page jumps if any anchor lacks href
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a');
+      if (a && (!a.getAttribute('href') || a.getAttribute('href') === '#')) { e.preventDefault(); }
+    });
+
+    render();
+  </script>
+</body>
+</html>
