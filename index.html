@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PACE 111T — Lessons Learned (Interactive)</title>
+  <meta name="description" content="Interactive reflection for PACE 111T Units 1–8 by Desler Antonio Fletes Bonilla.">
+  <style>
+    :root {
+      --bg: #0d1117; --bg2:#0b0f14; --card:#111827; --ink:#e6edf3; --muted:#9fb1c3;
+      --accent:#7dd3fc; --brand:#34d399; --ring: rgba(125,211,252,.35);
+      --shadow:0 12px 40px rgba(0,0,0,.35); --radius:18px;
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      background:
+        radial-gradient(1400px 700px at -20% -20%, #141b2a, transparent 60%),
+        radial-gradient(1000px 600px at 120% 0%, #0f1522, transparent 60%),
+        var(--bg);
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none }
+    a:hover { opacity:.9; text-decoration: underline }
+    .wrap { max-width: 1150px; margin: 0 auto; padding: 28px 20px 64px }
+    header { display:flex; gap: 20px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; margin-bottom: 24px }
+    h1 { margin: 0; font-size: clamp(28px, 3vw, 42px); line-height: 1.1 }
+    .sub { color: var(--muted); margin-top: 6px; max-width: 72ch }
+    .progress { width: 280px; min-width: 220px }
+    .bar { height: 12px; background:#1f2636; border-radius:999px; overflow:hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,.04) }
+    .bar>i { display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--brand), var(--accent)); transition: width .35s ease }
+    .meta { display:flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-bottom: 6px }
+    .grid { display:grid; gap:14px; grid-template-columns: repeat(2, 1fr) }
+    @media (min-width: 860px) { .grid { grid-template-columns: repeat(4, 1fr) } }
+    .pill {
+      position:relative; background: linear-gradient(180deg, #121827, #0e1421);
+      border:1px solid #20273a; border-radius: 14px; padding:12px 12px;
+      color: var(--ink); text-align:left; cursor:pointer; box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .pill:hover { transform: translateY(-1px) }
+    .pill[aria-current="true"] { border-color:#33415e; outline: 2px solid var(--ring) }
+    .pill .dot { width:8px; height:8px; border-radius:50%; background: var(--accent); display:inline-block; margin-right:8px }
+    .card {
+      position:relative; margin-top:20px; background: linear-gradient(180deg, #101827, #0b1220);
+      border:1px solid #1f2636; border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);
+    }
+    .card .hero {
+      position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(700px 300px at 10% 0%, rgba(141,211,255,.10), transparent 60%),
+        radial-gradient(600px 300px at 100% 100%, rgba(52,211,153,.08), transparent 60%);
+      opacity:.9;
+    }
+    .card .inner { position:relative; padding:28px 24px 28px }
+    h2 { margin:0 0 10px; font-size: clamp(22px, 2.2vw, 30px) }
+    .chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px }
+    .chip { font-size:12px; padding:4px 8px; border-radius:999px; background:#0b0f1a; border:1px solid #232b3e; color:#c6d4ee }
+    ul { margin:0; padding-left:20px } li { margin:7px 0 }
+    p { margin:12px 0 }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:18px 0 8px }
+    .btn { padding:10px 14px; border-radius:12px; border:1px solid #232b3e; background:#0b0f1a; color:var(--ink) }
+    .btn[disabled] { opacity:.4; cursor:not-allowed }
+    .count { color:var(--muted); font-size:13px }
+    .lead { color:#c9d3ee }
+    .media { margin-top:16px; display:grid; gap:10px }
+    .media iframe { width:100%; aspect-ratio: 16/9; border:0; border-radius:12px; box-shadow: var(--shadow) }
+    .audio-ui { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px }
+    .kbd { font-size:11px; padding:2px 6px; border-radius:6px; border:1px solid #26314b; background:#0b0f1a; color:#cbd5e1 }
+    .audio-loader { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+    .audio-loader input[type='text']{ width:320px; max-width:100%; padding:8px 10px; border-radius:10px; border:1px solid #232b3e; background:#0b0f1a; color:var(--ink) }
+    .hidden { display:none }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>PACE 111T — Lessons Learned (Interactive)</h1>
+        <p class="sub">Units 1–8, expanded with lecture-style summaries, concrete applications, and embedded videos.</p>
+        <div class="audio-ui">
+          <button id="sfx" class="btn" aria-pressed="false">🔊 SFX: Off</button>
+          <audio id="bgm" preload="none" loop controls style="max-width:280px">
+            <source id="bgm-src" src="" type="audio/mpeg">
+          </audio>
+          <div class="audio-loader">
+            <input id="bgm-url" type="text" placeholder="Paste a direct MP3 URL (CC0/royalty-free)" />
+            <input id="bgm-file" type="file" accept="audio/mpeg,audio/mp3" />
+            <button id="bgm-load" class="btn">Load Music</button>
+          </div>
+          <span class="kbd">Tip: Press ← / → to navigate</span>
+        </div>
+      </div>
+      <div class="progress" aria-label="progress">
+        <div class="meta"><span>Progress</span><span id="pct">0%</span></div>
+        <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+    </header>
+
+    <section class="nav">
+      <button id="prev" class="btn" aria-label="Previous section">← Previous</button>
+      <div class="count"><span id="pos">1</span> / 12</div>
+      <button id="next" class="btn" aria-label="Next section">Next →</button>
+    </section>
+
+    <section id="grid" class="grid" aria-label="Quick navigation"></section>
+
+    <article class="card" aria-live="polite">
+      <div class="hero"></"></div>
+      <div class="inner">
+        <div class="chips" id="chips"></div>
+        <h2 id="title"></h2>
+        <div id="content"></div>
+        <div id="media" class="media"></div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const SECTIONS = [
+  {
+    "id": 0,
+    "title": "Introduction",
+    "chips": [
+      "PACE 111T",
+      "Overview"
+    ],
+    "paras": [
+      "Welcome to my interactive reflection for PACE 111T. This site summarizes what I learned each week and how I’ll apply it.",
+      "Balancing academics with active-duty service pushed me to build better systems: focus blocks, smarter notes, and proactive communication."
+    ],
+    "lecture": [
+      "Orientation: What the course covers and how growth mindset fuels persistence.",
+      "Method: reflect → extract a technique → apply it in the next week."
+    ],
+    "learned": [
+      "Self-awareness is the lever for improvement.",
+      "Systems beat motivation—small, reliable habits compound."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/KbSPPFYxx3o"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Unit 1 — Introduction & Mindset / DAACS",
+    "chips": [
+      "Self‑Awareness",
+      "DAACS"
+    ],
+    "paras": [
+      "I used DAACS to map strengths and growth areas: study environment, test anxiety, and learning strategies."
+    ],
+    "lecture": [
+      "How DAACS domains translate into daily actions: environment, focus, metacognition.",
+      "Setting baselines and picking 1–2 habits to change first."
+    ],
+    "learned": [
+      "Identify friction points (noise, phone, unclear goals).",
+      "Track one habit for a week before stacking the next."
+    ],
+    "bullets": [
+      "Applied: ‘Do Not Disturb’, two quiet locations, pre‑study checklist.",
+      "Future: re-check DAACS every term to re-calibrate."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/PYfNA_lmkHM"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Unit 2 — Goals & Motivations (SMART)",
+    "chips": [
+      "SMART Goals",
+      "Motivation"
+    ],
+    "paras": [
+      "I turned intentions into SMART goals (degree by 2028, emergency fund milestones, data-career steps)."
+    ],
+    "lecture": [
+      "SMART framework: Specific, Measurable, Achievable, Relevant, Time‑bound.",
+      "Tie goals to weekly actions; review on Sundays."
+    ],
+    "learned": [
+      "Clarity reduces procrastination.",
+      "Momentum comes from visible progress."
+    ],
+    "bullets": [
+      "Applied: weekly review, goal → task mapping.",
+      "Future: quarterly OKR‑style revisions."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/1-SvuFIQjK8"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Unit 3 — Big Rocks & Time Management",
+    "chips": [
+      "Priorities",
+      "Time"
+    ],
+    "paras": [
+      "I prioritized ‘big rocks’ and built a realistic schedule around duty shifts, schoolwork, and life."
+    ],
+    "lecture": [
+      "Time boxing, focus sprints (25–50 min), energy-aware planning.",
+      "Buffers for travel/ops and exam weeks."
+    ],
+    "learned": [
+      "Protecting deep work hours increases quality and reduces stress."
+    ],
+    "bullets": [
+      "Applied: planner + alerts + Sunday planning.",
+      "Future: templates for heavy weeks."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/wfsl5R0S9nQ"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Unit 4 — Engaging with My Success Network",
+    "chips": [
+      "Support",
+      "Self‑Advocacy"
+    ],
+    "paras": [
+      "I mapped professors, tutors, advisors, and my Success Coach, and practiced concise outreach."
+    ],
+    "lecture": [
+      "Self‑advocacy email formula: context → clear ask → next step.",
+      "When to contact tutoring, writing center, or professor."
+    ],
+    "learned": [
+      "Asking early accelerates progress; silence slows it."
+    ],
+    "bullets": [
+      "Applied: 3‑sentence emails and scheduled office hours.",
+      "Future: monthly check‑ins and pre‑deadline reviews."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/5X3ZkV-0TtA"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Unit 5 — Informational Interview Preparation",
+    "chips": [
+      "Career",
+      "Interview"
+    ],
+    "paras": [
+      "I researched roles and trends in data/tech and interviewed Kevin Caballero Bonilla (Senior Data Architect)."
+    ],
+    "lecture": [
+      "How to find guests, craft questions, follow up, and convert insights into action items."
+    ],
+    "learned": [
+      "Networking turns ambiguity into direction."
+    ],
+    "bullets": [
+      "Applied: 10‑question guide; concise thank‑you with next steps.",
+      "Future: quarterly informational chats; CRM sheet of contacts."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/Gb6H0ZQh4OM"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Unit 6 — Networking & Teamwork",
+    "chips": [
+      "Teamwork",
+      "Communication"
+    ],
+    "paras": [
+      "I translated military teamwork into academic collaboration: clear roles, trust, and short feedback loops."
+    ],
+    "lecture": [
+      "Define roles, set ‘definition of done’, run quick retrospectives."
+    ],
+    "learned": [
+      "Responsibility + empathy = real collaboration."
+    ],
+    "bullets": [
+      "Applied: shared checklists and brief syncs.",
+      "Future: retro after each group deliverable."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/HhHc1ZkK1Mg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Unit 7 — Support Services",
+    "chips": [
+      "UMGC Resources",
+      "Tools"
+    ],
+    "paras": [
+      "I cataloged Writing Center, Career Services, UMGC Library, Microsoft 365, and tutoring resources."
+    ],
+    "lecture": [
+      "When to use which resource; building a personal ‘resource map’ at course start."
+    ],
+    "learned": [
+      "Tools reduce friction and raise quality."
+    ],
+    "bullets": [
+      "Applied: templates and citation guides to speed drafts.",
+      "Future: resource map every term."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/sjE1H2Pp9X8"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Unit 8 — Self‑Advocacy & Communicating Needs",
+    "chips": [
+      "Self‑Advocacy",
+      "Clarity"
+    ],
+    "paras": [
+      "I practiced respectful, proactive communication to clarify expectations early with professors and tutors."
+    ],
+    "lecture": [
+      "Boundary setting, clarity, and respectful tone. Example templates for extensions or rubric questions."
+    ],
+    "learned": [
+      "Confidence follows clarity."
+    ],
+    "bullets": [
+      "Applied: ask when unsure; propose timelines.",
+      "Future: message template library for common scenarios."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/E9L9QnGJm2k"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "My Key Takeaways",
+    "chips": [
+      "Growth",
+      "Habits"
+    ],
+    "paras": [
+      "What’s sticking with me beyond this course."
+    ],
+    "learned": [
+      "Time, environment, and stress can be managed with systems.",
+      "SMART goals + discipline keep me on track.",
+      "Support networks multiply outcomes.",
+      "Learning = consistency, curiosity, courage (not perfection)."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/H14bBuluwB8"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Applying What I’ve Learned",
+    "chips": [
+      "Next Steps",
+      "Career"
+    ],
+    "paras": [
+      "I’ll apply these lessons as I progress toward data science while serving in the military."
+    ],
+    "learned": [
+      "Maintain weekly planning and deep‑work blocks.",
+      "Proactively use Writing Center before big submissions.",
+      "Continue informational interviews and portfolio case studies."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/2Lz0VOltZKA"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Conclusion",
+    "chips": [
+      "Reflection",
+      "Purpose"
+    ],
+    "paras": [
+      "This course became a roadmap: reflect, adapt, own the next step."
+    ],
+    "learned": [
+      "I leave PACE 111T with clarity, confidence, and purpose."
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/1Y1WqYxq9kE"
+    ]
+  }
+];
+
+    const state = { i: 0, sfx: false };
+
+    const grid = document.getElementById('grid');
+    const title = document.getElementById('title');
+    const content = document.getElementById('content');
+    const chips = document.getElementById('chips');
+    const media = document.getElementById('media');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const pos = document.getElementById('pos');
+    const bar = document.getElementById('bar');
+    const pct = document.getElementById('pct');
+
+    const sfxBtn = document.getElementById('sfx');
+    const bgm = document.getElementById('bgm');
+    const bgmSrc = document.getElementById('bgm-src');
+    const bgmUrl = document.getElementById('bgm-url');
+    const bgmFile = document.getElementById('bgm-file');
+    const bgmLoad = document.getElementById('bgm-load');
+
+    // WebAudio click sfx
+    let ctx = null;
+    function ping() {
+      if (!state.sfx) return;
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = 660;
+      g.gain.value = 0.0001;
+      o.connect(g); g.connect(ctx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.10);
+      o.stop(ctx.currentTime + 0.11);
+    }
+
+    sfxBtn.addEventListener('click', () => {
+      state.sfx = !state.sfx;
+      sfxBtn.setAttribute('aria-pressed', String(state.sfx));
+      sfxBtn.textContent = state.sfx ? '🔊 SFX: On' : '🔇 SFX: Off';
+      ping();
+    });
+
+    // Audio loader
+    bgmLoad.addEventListener('click', async () => {
+      if (bgmFile.files && bgmFile.files[0]) {
+        const file = bgmFile.files[0];
+        const url = URL.createObjectURL(file);
+        bgmSrc.src = url;
+        bgm.load();
+        bgm.play().catch(()=>{});
+        return;
+      }
+      if (bgmUrl.value.trim()) {
+        bgmSrc.src = bgmUrl.value.trim();
+        bgm.load();
+        bgm.play().catch(()=>{});
+      }
+    });
+
+    function go(n) {
+      const clamped = Math.max(0, Math.min(SECTIONS.length - 1, n));
+      if (clamped !== state.i) { state.i = clamped; render(); ping(); window.scrollTo({top:0, behavior:'smooth'}); }
+    }
+    function nextSec() { go(state.i + 1); }
+    function prevSec() { go(state.i - 1); }
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      SECTIONS.forEach((u, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pill';
+        b.setAttribute('aria-current', i === state.i ? 'true' : 'false');
+        b.innerHTML = `<span class="dot"></span><span>${u.title}</span>`;
+        b.addEventListener('click', () => go(i));
+        grid.appendChild(b);
+      });
+    }
+
+    function renderSection() {
+      const u = SECTIONS[state.i];
+      title.textContent = u.title;
+      chips.innerHTML = '';
+      (u.chips || []).forEach(t => { const el = document.createElement('span'); el.className='chip'; el.textContent=t; chips.appendChild(el); });
+      content.innerHTML = '';
+
+      if (u.paras) {
+        u.paras.forEach(p => { const el = document.createElement('p'); el.className='lead'; el.textContent = p; content.appendChild(el); });
+      }
+      if (u.lecture) {
+        const h = document.createElement('p'); h.innerHTML = '<strong>Class-style summary:</strong>';
+        const ul = document.createElement('ul');
+        u.lecture.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        content.appendChild(h); content.appendChild(ul);
+      }
+      if (u.learned) {
+        const h = document.createElement('p'); h.innerHTML = '<strong>What I learned:</strong>';
+        const ul = document.createElement('ul');
+        u.learned.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        content.appendChild(h); content.appendChild(ul);
+      }
+      if (u.bullets) {
+        const h = document.createElement('p'); h.innerHTML = '<strong>Applied / Future:</strong>';
+        const ul = document.createElement('ul');
+        u.bullets.forEach(line => { const li = document.createElement('li'); li.textContent = line; ul.appendChild(li); });
+        content.appendChild(h); content.appendChild(ul);
+      }
+
+      media.innerHTML = '';
+      if (u.videos && u.videos.length) {
+        u.videos.forEach(src => {
+          const iframe = document.createElement('iframe');
+          iframe.src = src;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+          media.appendChild(iframe);
+        });
+      }
+    }
+
+    function renderNav() {
+      prev.disabled = state.i === 0;
+      next.disabled = state.i === SECTIONS.length - 1;
+      pos.textContent = String(state.i + 1);
+    }
+
+    function renderProgress() {
+      const p = Math.round(((state.i + 1) / SECTIONS.length) * 100);
+      bar.style.width = p + '%'; pct.textContent = p + '%';
+    }
+
+    function render() {
+      renderGrid(); renderSection(); renderNav(); renderProgress();
+    }
+
+    prev.addEventListener('click', prevSec);
+    next.addEventListener('click', nextSec);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSec();
+      if (e.key === 'ArrowLeft') prevSec();
+    });
+
+    render();
+  </script>
+</body>
+</html>
